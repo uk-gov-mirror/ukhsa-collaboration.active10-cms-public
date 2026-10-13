@@ -15,7 +15,11 @@ source .venv-collectstatic/bin/activate
 pip install --quiet --upgrade pip
 pip install --quiet -r requirements.txt
 
-python manage.py collectstatic --noinput
+echo "$(date -u +%FT%TZ) Starting collectstatic"
+python -u manage.py collectstatic --noinput --verbosity 2
+echo "$(date -u +%FT%TZ) collectstatic finished; deactivating virtual environment"
 
 deactivate
+echo "$(date -u +%FT%TZ) Removing .venv-collectstatic"
 rm -rf .venv-collectstatic
+echo "$(date -u +%FT%TZ) Static asset predeploy finished"
