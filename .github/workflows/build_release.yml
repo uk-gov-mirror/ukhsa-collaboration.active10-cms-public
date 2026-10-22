@@ -52,6 +52,8 @@ jobs:
       app_name: ${{ vars.APP_NAME }}
       service_identifier: ${{ vars.ECR_NAMESPACE }}
       aws_region: ${{ vars.AWS_REGION }}
+      # actions/python-versions has no 3.11.x build for Ubuntu 26.04 (ubuntu-latest).
+      runner_labels: '["ubuntu-24.04"]'
       run_unit_tests: ${{ vars.RUN_UNIT_TESTS == 'true' }}
       push_image: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
       release_tag: ${{ needs.prepare-release-tag.outputs.release_tag }}
